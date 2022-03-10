@@ -9,10 +9,16 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
 import com.learprogramming.shopapp.R
-import kotlinx.android.synthetic.main.activity_register.*
+import com.learprogramming.shopapp.databinding.ActivityRegisterBinding
+
+//import kotlinx.android.synthetic.main.activity_register.*
+
+//import kotlinx.android.synthetic.main.activity_register.*
 
 @Suppress("DEPRECATION")
 class RegisterActivity : BaseActivity() {
+
+    lateinit var binding: ActivityRegisterBinding
 
     /**
      * This function is auto created by Android when the Activity Class is created.
@@ -32,8 +38,7 @@ class RegisterActivity : BaseActivity() {
 
         setupActionBar()
 
-        btn_register.setOnClickListener {
-
+        binding.btnRegister.setOnClickListener {
             registerUser()
         }
     }
@@ -43,7 +48,7 @@ class RegisterActivity : BaseActivity() {
      */
     private fun setupActionBar() {
 
-        setSupportActionBar(toolbar_register_activity)
+        setSupportActionBar(binding.toolbarRegisterActivity)
 
         val actionBar = supportActionBar
         if (actionBar != null) {
@@ -51,7 +56,7 @@ class RegisterActivity : BaseActivity() {
             actionBar.setHomeAsUpIndicator(R.drawable.ic_black_color_back_24dp)
         }
 
-        toolbar_register_activity.setNavigationOnClickListener { onBackPressed() }
+        binding.toolbarRegisterActivity.setNavigationOnClickListener { onBackPressed() }
     }
 
     /**
@@ -59,27 +64,29 @@ class RegisterActivity : BaseActivity() {
      */
     private fun validateRegisterDetails(): Boolean {
         return when {
-            TextUtils.isEmpty(et_first_name.text.toString().trim { it <= ' ' }) -> {
+
+            TextUtils.isEmpty(binding.etFirstName.text.toString().trim { it <= ' ' }) -> {
                 showErrorSnackBar(resources.getString(R.string.err_msg_enter_first_name), true)
                 false
             }
 
-            TextUtils.isEmpty(et_last_name.text.toString().trim { it <= ' ' }) -> {
+            TextUtils.isEmpty(binding.etLastName.text.toString().trim { it <= ' ' }) -> {
                 showErrorSnackBar(resources.getString(R.string.err_msg_enter_last_name), true)
                 false
             }
 
-            TextUtils.isEmpty(et_email.text.toString().trim { it <= ' ' }) -> {
+            TextUtils.isEmpty(binding.etEmail.text.toString().trim { it <= ' ' }) -> {
                 showErrorSnackBar(resources.getString(R.string.err_msg_enter_email), true)
                 false
             }
 
-            TextUtils.isEmpty(et_password.text.toString().trim { it <= ' ' }) -> {
+
+            TextUtils.isEmpty(binding.etPassword.text.toString().trim { it <= ' ' }) -> {
                 showErrorSnackBar(resources.getString(R.string.err_msg_enter_password), true)
                 false
             }
 
-            TextUtils.isEmpty(et_confirm_password.text.toString().trim { it <= ' ' }) -> {
+            TextUtils.isEmpty(binding.etConfirmPassword.text.toString().trim { it <= ' ' }) -> {
                 showErrorSnackBar(
                     resources.getString(R.string.err_msg_enter_confirm_password),
                     true
@@ -87,7 +94,7 @@ class RegisterActivity : BaseActivity() {
                 false
             }
 
-            et_password.text.toString().trim { it <= ' ' } != et_confirm_password.text.toString()
+            binding.etPassword.text.toString().trim { it <= ' ' } != binding.etConfirmPassword.text.toString()
                 .trim { it <= ' ' } -> {
                 showErrorSnackBar(
                     resources.getString(R.string.err_msg_password_and_confirm_password_mismatch),
@@ -95,7 +102,8 @@ class RegisterActivity : BaseActivity() {
                 )
                 false
             }
-            !cb_terms_and_condition.isChecked -> {
+
+            !binding.cbTermsAndCondition.isChecked -> {
                 showErrorSnackBar(
                     resources.getString(R.string.err_msg_agree_terms_and_condition),
                     true
@@ -122,8 +130,8 @@ class RegisterActivity : BaseActivity() {
             showProgressDialog(resources.getString(R.string.please_wait))
             // END
 
-            val email: String = et_email.text.toString().trim { it <= ' ' }
-            val password: String = et_email.text.toString().trim { it <= ' ' }
+            val email: String = binding.etEmail.text.toString().trim { it <= ' ' }
+            val password: String = binding.etEmail.text.toString().trim { it <= ' ' }
 
             // Create an instance and create a register a user with email and password.
             FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
