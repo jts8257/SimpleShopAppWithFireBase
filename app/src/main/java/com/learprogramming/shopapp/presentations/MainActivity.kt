@@ -1,8 +1,9 @@
-package com.learprogramming.shopapp.presentation
+package com.learprogramming.shopapp.presentations
 
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.learprogramming.shopapp.R
+import android.view.WindowInsets
 import com.learprogramming.shopapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

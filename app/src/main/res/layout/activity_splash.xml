@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/img_splash_background"
-    tools:context=".presentation.SplashActivity">
+    tools:context=".presentations.SplashActivity">
 
-    <com.learprogramming.shopapp.views.MSPTextViewBold
+    <com.learprogramming.shopapp.presentations.views.MSPTextViewBold
         android:id="@+id/tv_app_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

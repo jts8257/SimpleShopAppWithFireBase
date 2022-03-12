@@ -1,10 +1,10 @@
-package com.learprogramming.shopapp.presentation
+package com.learprogramming.shopapp.presentations
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
 import com.learprogramming.shopapp.R
-import com.learprogramming.shopapp.presentation.dialog.ProgressDialog
+import com.learprogramming.shopapp.presentations.dialog.ProgressDialog
 
 
 /**

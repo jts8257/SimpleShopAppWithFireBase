@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--TODO Step 1: Create a design for progress dialog.-->
-<!--START-->
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_marginStart="48dp"
+    android:layout_marginEnd="48dp"
     android:layout_height="wrap_content"
     android:gravity="center"
-    android:orientation="horizontal"
+    android:orientation="vertical"
+    android:background="@color/dialogBackground"
     android:padding="@dimen/progress_dialog_content_padding">
 
     <ProgressBar
@@ -18,11 +20,12 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.learprogramming.shopapp.views.MSPTextView
+    <com.learprogramming.shopapp.presentations.views.MSPTextView
         android:id="@+id/tv_progress_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/progress_text_marginStart"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:text="@string/please_wait"
         android:textColor="@color/colorPrimaryText"
         android:textSize="@dimen/progress_text_size"
@@ -30,5 +33,4 @@
         app:layout_constraintStart_toEndOf="@+id/progressBar"
         app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
-    <!--END-->
+</LinearLayout>

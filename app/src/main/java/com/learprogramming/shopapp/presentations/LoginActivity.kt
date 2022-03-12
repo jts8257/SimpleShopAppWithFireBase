@@ -1,10 +1,10 @@
-package com.learprogramming.shopapp.presentation
+package com.learprogramming.shopapp.presentations
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
-import android.view.WindowManager
+import android.view.WindowInsets
 import androidx.appcompat.app.AppCompatActivity
-import com.learprogramming.shopapp.R
 import com.learprogramming.shopapp.databinding.ActivityLoginBinding
 
 /**
@@ -24,12 +24,9 @@ class LoginActivity : AppCompatActivity() {
         // This is used to align the xml view to this class
         setContentView(binding.root)
 
-        // This is used to hide the status bar and make the login screen as a full screen activity.
-        // It is deprecated in the API level 30. I will update you with the alternate solution soon.
-        window.setFlags(
-            WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN
-        )
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.insetsController?.hide(WindowInsets.Type.statusBars())
+        }
 
         binding.tvRegister.setOnClickListener {
             // Launch the register screen when the user clicks on the text.

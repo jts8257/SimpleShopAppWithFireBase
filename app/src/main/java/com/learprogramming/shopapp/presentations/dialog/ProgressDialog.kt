@@ -1,6 +1,5 @@
-package com.learprogramming.shopapp.presentation.dialog
+package com.learprogramming.shopapp.presentations.dialog
 
-import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View

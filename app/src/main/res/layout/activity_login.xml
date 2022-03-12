@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
-    tools:context=".presentation.LoginActivity">
+    tools:context=".presentations.LoginActivity">
 
     <FrameLayout
         android:id="@+id/fl_header_image"
@@ -33,7 +33,7 @@
             app:tint="@color/colorWhite" />
     </FrameLayout>
 
-    <com.learprogramming.shopapp.views.MSPTextViewBold
+    <com.learprogramming.shopapp.presentations.views.MSPTextViewBold
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_title">
 
-        <com.learprogramming.shopapp.views.MSPEditText
+        <com.learprogramming.shopapp.presentations.views.MSPEditText
             android:id="@+id/et_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -87,7 +87,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/til_email">
 
-        <com.learprogramming.shopapp.views.MSPEditText
+        <com.learprogramming.shopapp.presentations.views.MSPEditText
             android:id="@+id/et_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -98,7 +98,7 @@
             tools:text="123456" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.learprogramming.shopapp.views.MSPTextView
+    <com.learprogramming.shopapp.presentations.views.MSPTextView
         android:id="@+id/tv_forgot_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -111,7 +111,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/til_password" />
 
-    <com.learprogramming.shopapp.views.MSPButton
+    <com.learprogramming.shopapp.presentations.views.MSPButton
         android:id="@+id/btn_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -141,7 +141,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btn_login">
 
-        <com.learprogramming.shopapp.views.MSPTextView
+        <com.learprogramming.shopapp.presentations.views.MSPTextView
             android:id="@+id/tv_don_t_have_an_account"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -150,7 +150,7 @@
             android:textColor="@color/colorSecondaryText"
             android:textSize="@dimen/lbl_text_view_textSize" />
 
-        <com.learprogramming.shopapp.views.MSPTextViewBold
+        <com.learprogramming.shopapp.presentations.views.MSPTextViewBold
             android:id="@+id/tv_register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

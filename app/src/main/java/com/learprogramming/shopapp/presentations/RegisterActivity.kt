@@ -1,21 +1,14 @@
-package com.learprogramming.shopapp.presentation
+package com.learprogramming.shopapp.presentations
 
 import android.os.Bundle
 import android.text.TextUtils
-import android.view.WindowManager
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-
 import com.learprogramming.shopapp.R
 import com.learprogramming.shopapp.databinding.ActivityRegisterBinding
 
-//import kotlinx.android.synthetic.main.activity_register.*
-
-//import kotlinx.android.synthetic.main.activity_register.*
-
-@Suppress("DEPRECATION")
 class RegisterActivity : BaseActivity() {
 
     lateinit var binding: ActivityRegisterBinding
@@ -27,35 +20,25 @@ class RegisterActivity : BaseActivity() {
         //This call the parent constructor
         super.onCreate(savedInstanceState)
         // This is used to align the xml view to this class
-        setContentView(R.layout.activity_register)
-
-        // This is used to hide the status bar and make the splash screen as a full screen activity.
-        // It is deprecated in the API level 30. I will update you with the alternate solution soon.
-        window.setFlags(
-            WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN
-        )
-
+        binding = ActivityRegisterBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         setupActionBar()
+
+        binding.tvLogin.setOnClickListener {
+            onBackPressed()
+        }
 
         binding.btnRegister.setOnClickListener {
             registerUser()
         }
     }
 
-    /**
-     * A function for actionBar Setup.
-     */
     private fun setupActionBar() {
-
         setSupportActionBar(binding.toolbarRegisterActivity)
-
-        val actionBar = supportActionBar
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true)
-            actionBar.setHomeAsUpIndicator(R.drawable.ic_black_color_back_24dp)
-        }
-
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_black_color_back_24dp)
+// This listener will be called whenever the user clicks the navigation button at the start of the toolbar.
+// An icon must be set for the navigation button to appear.
         binding.toolbarRegisterActivity.setNavigationOnClickListener { onBackPressed() }
     }
 
@@ -79,7 +62,6 @@ class RegisterActivity : BaseActivity() {
                 showErrorSnackBar(resources.getString(R.string.err_msg_enter_email), true)
                 false
             }
-
 
             TextUtils.isEmpty(binding.etPassword.text.toString().trim { it <= ' ' }) -> {
                 showErrorSnackBar(resources.getString(R.string.err_msg_enter_password), true)
