@@ -9,7 +9,9 @@ import android.view.WindowInsets
 import androidx.lifecycle.lifecycleScope
 import com.google.firebase.auth.FirebaseAuth
 import com.learprogramming.shopapp.commons.LoginSession
+import com.learprogramming.shopapp.data.User
 import com.learprogramming.shopapp.databinding.ActivityLoginBinding
+import com.learprogramming.shopapp.repositories.remote.FireStoreRepository
 import kotlinx.coroutines.launch
 
 class LoginActivity: BaseActivity(), View.OnClickListener {
@@ -20,7 +22,6 @@ class LoginActivity: BaseActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        checkLoginSession()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.insetsController?.hide(WindowInsets.Type.statusBars())
         }
@@ -54,40 +55,28 @@ class LoginActivity: BaseActivity(), View.OnClickListener {
                                         LoginSession.email = email
                                         LoginSession.passwd = password
                                     }
-                                    hideProgressDialog()
-                                    loginSuccess()
+                                    FireStoreRepository().getUserDetails(
+                                        { user -> userLoggedInSuccess(user) },
+                                        { hideProgressDialog()})
                                 } else {
+                                    hideProgressDialog()
                                     showErrorSnackBar(task.exception!!.message.toString(),
                                         true)
                                 }
                             }
                     }
                 }
-
             }
         }
     }
 
-    private fun checkLoginSession() {
-        lifecycleScope.launch {
-            val email = LoginSession.email
-            val passwd = LoginSession.passwd
-            if (email != null && passwd != null) {
-                FirebaseAuth.getInstance().signInWithEmailAndPassword(email, passwd)
-                    .addOnCompleteListener { task ->
-                        if(task.isSuccessful) {
-                            loginSuccess()
-                        }
-                    }
-            }
-        }
-    }
-
-    private fun loginSuccess() {
+    private fun userLoggedInSuccess(user: User) {
+        hideProgressDialog()
         val intent = Intent(this@LoginActivity, MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
     }
+
 
     private fun isValidEmailAndPassWord(email: String, passwd: String):Boolean {
         return when {
@@ -104,4 +93,5 @@ class LoginActivity: BaseActivity(), View.OnClickListener {
             }
         }
     }
+
 }

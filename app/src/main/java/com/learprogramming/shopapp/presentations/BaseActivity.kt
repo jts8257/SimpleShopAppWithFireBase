@@ -10,12 +10,12 @@ import com.learprogramming.shopapp.presentations.dialog.ProgressDialog
 open class BaseActivity: AppCompatActivity() {
     lateinit var progressDialog: ProgressDialog
 
-    protected fun showToastMessage(message: String) {
+    fun showToastMessage(message: String) {
         Toast.makeText(this@BaseActivity, message, Toast.LENGTH_SHORT)
             .show()
     }
 
-    protected fun showErrorSnackBar(message: String, errorMessage: Boolean) {
+    fun showErrorSnackBar(message: String, errorMessage: Boolean) {
         val snackBar =
             Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG)
         val snackBarView = snackBar.view
@@ -38,13 +38,13 @@ open class BaseActivity: AppCompatActivity() {
         snackBar.show()
     }
 
-    protected fun showProgressDialog(text: String) {
+    fun showProgressDialog(text: String) {
         progressDialog =  ProgressDialog(text)
         progressDialog.isCancelable = false
         progressDialog.show(supportFragmentManager, "ProgressDialog")
     }
 
-    protected fun hideProgressDialog() {
+    fun hideProgressDialog() {
         progressDialog.dismiss()
     }
 }

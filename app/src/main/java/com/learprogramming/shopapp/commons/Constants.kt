@@ -1,3 +1,10 @@
 package com.learprogramming.shopapp.commons
 
-const val constant = 1
+import com.learprogramming.shopapp.data.User
+
+typealias basis = () -> Unit
+typealias userBasis = (User) -> Unit
+
+object Constants {
+    const val USERS: String = "users"
+}

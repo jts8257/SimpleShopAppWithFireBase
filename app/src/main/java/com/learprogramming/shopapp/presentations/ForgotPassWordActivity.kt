@@ -1,7 +1,6 @@
 package com.learprogramming.shopapp.presentations
 
 import android.os.Bundle
-import android.text.TextUtils
 import com.google.firebase.auth.FirebaseAuth
 import com.learprogramming.shopapp.R
 import com.learprogramming.shopapp.databinding.ActivityForgotPassWordBinding
@@ -34,7 +33,6 @@ class ForgotPassWordActivity : BaseActivity() {
             }
         }
     }
-
 
     private fun setupActionBar() {
     setSupportActionBar(binding.toolbarForgotPasswordActivity)

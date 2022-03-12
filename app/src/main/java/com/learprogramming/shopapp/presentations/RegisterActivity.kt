@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.text.TextUtils
 import com.google.firebase.auth.FirebaseAuth
 import com.learprogramming.shopapp.R
+import com.learprogramming.shopapp.data.User
 import com.learprogramming.shopapp.databinding.ActivityRegisterBinding
+import com.learprogramming.shopapp.repositories.remote.FireStoreRepository
 
 class RegisterActivity : BaseActivity() {
 
@@ -34,14 +36,8 @@ class RegisterActivity : BaseActivity() {
 
     private fun validateRegisterDetails(): Boolean {
         return when {
-
-            TextUtils.isEmpty(binding.etFirstName.text.toString().trim { it <= ' ' }) -> {
+            TextUtils.isEmpty(binding.etNickname.text.toString().trim { it <= ' ' }) -> {
                 showErrorSnackBar(resources.getString(R.string.err_msg_enter_first_name), true)
-                false
-            }
-
-            TextUtils.isEmpty(binding.etLastName.text.toString().trim { it <= ' ' }) -> {
-                showErrorSnackBar(resources.getString(R.string.err_msg_enter_last_name), true)
                 false
             }
 
@@ -88,23 +84,31 @@ class RegisterActivity : BaseActivity() {
     private fun registerUser() {
 
         if (validateRegisterDetails()) {
-
             showProgressDialog(resources.getString(R.string.please_wait))
             val email: String = binding.etEmail.text.toString().trim { it <= ' ' }
             val password: String = binding.etEmail.text.toString().trim { it <= ' ' }
 
             FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
-                    hideProgressDialog()
                     if (task.isSuccessful) {
-                        showErrorSnackBar("회원 가입에 성공했습니다.", false)
-                        FirebaseAuth.getInstance().signOut()
-                        finish()
+                        val firebaseUser = task.result!!.user!!
+                        val user = User(
+                            firebaseUser.uid,
+                            binding.etNickname.text.toString().trim { it <= ' ' },
+                            email
+                        )
+                        FireStoreRepository().registerUser(user, {onRegisterSuccess()}, {hideProgressDialog()})
                     } else {
-                        // If the registering is not successful then show error message.
                         showErrorSnackBar(task.exception!!.message.toString(), true)
                     }
                 }
         }
+    }
+
+    fun onRegisterSuccess() {
+        hideProgressDialog()
+        showErrorSnackBar("회원 가입에 성공했습니다.", false)
+        FirebaseAuth.getInstance().signOut()
+        finish()
     }
 }
