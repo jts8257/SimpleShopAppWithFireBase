@@ -34,7 +34,9 @@ class LoginActivity: BaseActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         if (v != null) {
             when (v) {
-                binding.tvForgotPassword -> {}
+                binding.tvForgotPassword -> {
+                    startActivity(Intent(this@LoginActivity, ForgotPassWordActivity::class.java))
+                }
                 binding.tvRegister -> {
                     val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
                     startActivity(intent)
@@ -55,8 +57,8 @@ class LoginActivity: BaseActivity(), View.OnClickListener {
                                     hideProgressDialog()
                                     loginSuccess()
                                 } else {
-                                    hideProgressDialog()
-                                    showErrorSnackBar(task.exception!!.message.toString(), true)
+                                    showErrorSnackBar(task.exception!!.message.toString(),
+                                        true)
                                 }
                             }
                     }
