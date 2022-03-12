@@ -98,13 +98,9 @@ class RegisterActivity : BaseActivity() {
                 .addOnCompleteListener { task ->
                     hideProgressDialog()
                     if (task.isSuccessful) {
-
-                        showErrorSnackBar(
-                            "회원 가입에 성공했습니다.",
-                            false
-                        )
-                        startActivity(Intent(this@RegisterActivity, MainActivity::class.java))
-
+                        showErrorSnackBar("회원 가입에 성공했습니다.", false)
+                        FirebaseAuth.getInstance().signOut()
+                        finish()
                     } else {
                         // If the registering is not successful then show error message.
                         showErrorSnackBar(task.exception!!.message.toString(), true)
