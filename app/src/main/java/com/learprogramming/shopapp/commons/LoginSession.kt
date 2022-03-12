@@ -22,10 +22,27 @@ object LoginSession {
             EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM)
     }
 
-    private enum class Key {
-        ACCESS_TOKEN, REFRESH_TOKEN, UID, USERNAME;
+    var email: String?
+    get() = Key.EMAIL_ID.getString()
+    set(value) = Key.EMAIL_ID.setString(value)
 
-        fun getInt(): Int? = if (pref!!.contains(name)) pref!!.getInt(name, 0) else null
+    var passwd: String?
+    get() = Key.PASSWD.getString()
+    set(value) = Key.PASSWD.setString(value)
+
+    fun removeLoginSession() {
+        if (Key.EMAIL_ID.exists()) {
+            Key.EMAIL_ID.remove()
+        }
+
+        if (Key.PASSWD.exists()) {
+            Key.PASSWD.remove()
+        }
+    }
+
+    private enum class Key {
+        EMAIL_ID, PASSWD;
+
         fun getString(): String? = if (pref!!.contains(name)) pref!!.getString(name, "") else null
 
         fun setString(value: String?)  {
@@ -36,15 +53,7 @@ object LoginSession {
             }
         }
 
-        fun setInt(value: Int?) {
-            value?.let {
-                val editor = pref!!.edit()
-                editor.putInt(name, value)
-                editor.commit()
-            }
-        }
-
         fun exists(): Boolean = pref!!.contains(name)
-        fun remove() { pref!!.edit().remove(name).commit() }
+        fun remove() { pref!!.edit().remove(name).apply() }
     }
 }
