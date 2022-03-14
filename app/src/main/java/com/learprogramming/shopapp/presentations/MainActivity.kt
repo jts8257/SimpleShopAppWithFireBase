@@ -16,11 +16,20 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        LoginSession.nickname?.let {
+            
+        }
+
         binding.logout.setOnClickListener {
             LoginSession.removeLoginSession()
             FirebaseAuth.getInstance().signOut()
             val intent = Intent(this@MainActivity, LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+        }
+
+        binding.profile.setOnClickListener {
+            val intent = Intent(this@MainActivity, UserProfileActivity::class.java)
             startActivity(intent)
         }
     }

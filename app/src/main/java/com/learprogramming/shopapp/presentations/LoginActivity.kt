@@ -26,7 +26,6 @@ class LoginActivity: BaseActivity(), View.OnClickListener {
             window.insetsController?.hide(WindowInsets.Type.statusBars())
         }
 
-//        View.OnClickListener 를 구현했기 때문에 이렇게 할 수 있음.
         binding.tvForgotPassword.setOnClickListener(this)
         binding.tvRegister.setOnClickListener(this)
         binding.btnLogin.setOnClickListener(this)
@@ -51,10 +50,6 @@ class LoginActivity: BaseActivity(), View.OnClickListener {
                         FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
                             .addOnCompleteListener { task ->
                                 if (task.isSuccessful) {
-                                    lifecycleScope.launch {
-                                        LoginSession.email = email
-                                        LoginSession.passwd = password
-                                    }
                                     FireStoreRepository().getUserDetails(
                                         { user -> userLoggedInSuccess(user) },
                                         { hideProgressDialog()})

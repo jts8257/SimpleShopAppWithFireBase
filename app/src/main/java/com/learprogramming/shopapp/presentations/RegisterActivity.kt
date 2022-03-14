@@ -93,9 +93,10 @@ class RegisterActivity : BaseActivity() {
                     if (task.isSuccessful) {
                         val firebaseUser = task.result!!.user!!
                         val user = User(
-                            firebaseUser.uid,
-                            binding.etNickname.text.toString().trim { it <= ' ' },
-                            email
+                            uid = firebaseUser.uid,
+                            nickname = binding.etNickname.text.toString().trim { it <= ' ' },
+                            email = email,
+                            gender = "none"
                         )
                         FireStoreRepository().registerUser(user, {onRegisterSuccess()}, {hideProgressDialog()})
                     } else {
